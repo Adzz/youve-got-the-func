@@ -11,7 +11,7 @@ RSpec.describe Maybe do
    end
   end
 
-  xcontext "As a mapp-able container it..." do
+  context "As a mapp-able container it..." do
     let(:nothing) { Maybe.new(nil) }
 
     it "maps a function over the contained value applying it correctly" do
@@ -30,7 +30,7 @@ RSpec.describe Maybe do
   end
 
 
-  xcontext "follows the second functor law" do
+  context "follows the second functor law" do
     it "composed functions are equal to successive non composed functions" do
       plus_four = ->(x) { x + 4 }
       plus_four_add_ten = -> (x) { x + 4 + 10 }
@@ -41,7 +41,7 @@ RSpec.describe Maybe do
     end
   end
 
-  xcontext "BONUS ROUND" do
+  context "BONUS ROUND" do
     let(:addition) { ->(x, y) { x + y  } }
 
     it "functions are partially applied" do
