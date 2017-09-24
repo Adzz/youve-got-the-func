@@ -27,7 +27,9 @@ So let's take an array. How would we operate on a value in an array?
 
 We'd use a `map` function:
 
-```["this","is","cool"].map(&:upcase)```
+```ruby
+["this","is","cool"].map(&:upcase)
+```
 
 The map function takes each value one at a time and applies the function we supply to it. Crucially, we are returned a new array of values at the end. That is to say when we are returned the operated-on-values, they are still in their computational context - the array.
 
@@ -45,7 +47,7 @@ Functors have some laws that should hold for all of them. They are MAPPABLE cont
 
 Wait what is the id function? This:
 
-```
+```ruby
 def identity(x)
   x
 end
@@ -56,7 +58,9 @@ I know right?!* Seems kind of obvious that we would get back the same array if t
 
 The second law also seems sort of obvious:
 
-`[1,2,3,4].map {|x| x + 1}.map{|y| y * 10 } == [1,2,3,4].map {|x| (x + 1) * 10}`
+```ruby
+[1,2,3,4].map {|x| x + 1}.map{|y| y * 10 } == [1,2,3,4].map {|x| (x + 1) * 10}
+```
 
 So with that, let's have a crack at implementing our own.
 
