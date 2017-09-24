@@ -5,8 +5,17 @@ class Maybe
 
   def fmap(function)
     return self if value.nil?
-    return Maybe.new(compose(value, function)) if value.is_a?(Proc) && function.is_a?(Proc)
-    Maybe.new(function.curry.call(value))
+    # this is obviously very nasty
+    begin
+      Maybe.new(function.curry.call(value))
+    rescue NoMethodError
+      Maybe.new(compose(value, function))
+    end
+  end
+
+  def apply(maybe_function)
+    return self if maybe_function.value.nil? || self.value.nil?
+    fmap(maybe_function.value)
   end
 
   def ==(other)

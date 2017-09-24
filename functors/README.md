@@ -65,11 +65,9 @@ The second law also seems sort of obvious:
 So with that, let's have a crack at implementing our own.
 
 
-### Excercise 1
+### Excercise
 
-Head to the functor folder and have a look at the tests. I've written tests to guide you towards a functor implementation of a Maybe type. Un `x` the tests one at a time to step towards the solution.
-
-
+Head to the `spec` folder and have a look at the tests. I've written tests to guide you towards a functor implementation of a Maybe type. Un `x` the tests one at a time to step towards the solution.
 
 
 
@@ -82,5 +80,3 @@ Head to the functor folder and have a look at the tests. I've written tests to g
 
 
 *The idea here is that it simply lifts the value up to the function context. In a sense, we could say it wraps the value in a function context... Remember how we said functions were containers...?
-
-Interestingly string isn't a functor - maybe we could make it one?
