@@ -6,7 +6,6 @@ RSpec.describe Maybe do
   let(:nothing) { Maybe.new(nil) }
   let(:fifty)   { Maybe.new(50) }
 
-
   context "FUNCTOR #fmap" do
     it "fmaping identity will return the same maybe" do
       expect(fifty.fmap(identity)).to eq Maybe.new(50)
@@ -93,6 +92,14 @@ RSpec.describe Maybe do
 
     it "chains together functions that return maybes successfully" do
       expect(fifty.bind(constructor).bind(constructor)).to eq Maybe.new(50)
+    end
+
+    it "wont explode on nils" do
+      stumbling_block = Maybe.new(->(_x) { Maybe.new(nil) })
+      expect(fifty.bind(constructor).bind(stumbling_block)).to eq Maybe.new(nil)
+    end
+
+    it "" do
     end
   end
 end
