@@ -98,8 +98,5 @@ RSpec.describe Maybe do
       stumbling_block = Maybe.new(->(_x) { Maybe.new(nil) })
       expect(fifty.bind(constructor).bind(stumbling_block)).to eq Maybe.new(nil)
     end
-
-    it "" do
-    end
   end
 end
