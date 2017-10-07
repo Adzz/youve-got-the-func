@@ -56,7 +56,52 @@ RSpec.describe Maybe do
     end
   end
 
-  context "APPLICATIVES" do
-    it ""
+  context "APPLICATIVES #apply" do
+    let(:id)      { Maybe.new(identity) }
+    let(:fifty)   { Maybe.new(50) }
+    let(:add_ten_wrapped) { Maybe.new( ->(x) { x + 10}) }
+
+    context "Still prevents nil errors" do
+      it "wont blow up if we map over a nothing" do
+        expect(nothing.apply(add_ten_wrapped)).to eq nothing
+      end
+
+      it "hitting a nil in a chain of functions wont blow up" do
+        stumbling_block = Maybe.new(-> (_x) { nil })
+        expect(Maybe.new(10).apply(add_ten_wrapped).apply(stumbling_block)).to eq nothing
+        expect(Maybe.new(10).apply(stumbling_block).apply(add_ten_wrapped)).to eq nothing
+      end
+    end
+
+    context "First Applicative Law" do
+      it "Identity - applying the id function to a wrapped value yields the same wrapped result" do
+        identity = fifty.apply(id) == Maybe.new(50)
+        expect(identity).to be true
+      end
+    end
+
+    context "Second applicative law" do
+      it "Homomorphism - Applying a wrapped function to a wrapped value is the same as applying an unwrapped function to an unwrapped value, and then wrapping it" do
+        homomorphism = fifty.apply(add_ten_wrapped) == Maybe.new(add_ten.call(50))
+        expect(homomorphism).to be true
+      end
+    end
+
+    context "Third applicative law" do
+      it "Interchange" do
+        interchange = fifty.apply(add_ten_wrapped) == add_ten_wrapped.apply(Maybe.new(->(func){func.call(50)}))
+        expect(interchange).to be true
+      end
+    end
+
+    context "Fourth applicative law" do
+      it "Composition" do
+        add_four_wrapped = Maybe.new(->(x) {x + 4})
+        add_fourteen     = Maybe.new(->(x) {x + 14})
+
+        composition = fifty.apply(add_ten_wrapped).apply(add_four_wrapped) ==  fifty.apply(add_fourteen)
+        expect(composition).to be true
+      end
+    end
   end
 end
