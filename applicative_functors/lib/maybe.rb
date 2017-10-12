@@ -9,6 +9,9 @@ class Maybe
     Maybe.new(function.curry.call(value))
   end
 
+  def apply(other)
+  end
+
   def ==(other)
     other.value == self.value
   end
