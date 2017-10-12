@@ -6,7 +6,6 @@ RSpec.describe Maybe do
   let(:nothing) { Maybe.new(nil) }
   let(:fifty)   { Maybe.new(50) }
 
-
   context "FUNCTOR #fmap" do
     it "fmaping identity will return the same maybe" do
       expect(fifty.fmap(identity)).to eq Maybe.new(50)

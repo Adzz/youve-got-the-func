@@ -23,6 +23,14 @@ class Maybe
     apply(func_that_returns_maybe)
   end
 
+  def chain(next_link)
+    if next_link.is_a? Maybe
+      flatten_result(apply(next_link))
+    else
+      flatten_result(map(next_link))
+    end
+  end
+
   def ==(other)
     other.value == self.value
   end
