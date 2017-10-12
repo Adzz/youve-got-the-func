@@ -1,20 +1,14 @@
-class Appendable
-  def mappend(other)
-    raise NotImplementedError
-  end
-end
-
-class Number < Appendable
-  def initiialize(value)
+class Number
+  def initialize(value)
     @value = value
   end
 
   attr_reader :value
 
-  def add(other)
-    return other if @value == 0
-    return self if other.value == 0
-    self.class.new(@value + other.value)
+  def multiply(other)
+    return other if @value == 1
+    return self if other.value == 1
+    Number.new(@value * other.value)
   end
 
   def ==(other)
