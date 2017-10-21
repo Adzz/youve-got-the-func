@@ -23,11 +23,14 @@ class Maybe
     apply(func_that_returns_maybe)
   end
 
+  # ^ this is okay but we still have to know about which function call to use when
+  # we could remove that decision process automagically?
+
   def chain(next_link)
     if next_link.is_a? Maybe
       flatten_result(apply(next_link))
     else
-      flatten_result(map(next_link))
+      flatten_result(fmap(next_link))
     end
   end
 
@@ -36,6 +39,14 @@ class Maybe
   end
 
   attr_reader :value
+
+  def flatten_result(result)
+    if result.value.is_a? Maybe
+      return result.value
+    else
+      return result
+    end
+  end
 
   private
 
