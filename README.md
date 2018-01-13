@@ -1,7 +1,5 @@
 ## You've Got the Func!
 
-You don't? Well allowwwww me.
-
 This repo is designed to teach the concepts behind functors, applicatives, monads and monoids.
 
 Clone the repo.
